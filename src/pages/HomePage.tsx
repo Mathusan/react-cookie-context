@@ -14,8 +14,7 @@ export default function HomePage() {
 
 
   useEffect(() => {
-      // console.log(auth.isLoggedIn)
-      // if(auth.isLoggedIn){
+      if(auth.isLoggedIn){
         let isMounted = true
         const controller = new AbortController();
 
@@ -40,9 +39,9 @@ export default function HomePage() {
         controller.abort()
       }
 
+      }
 
-
-  },[])
+  },[auth])
 
   return (
     <>

@@ -1,5 +1,4 @@
-import { createContext, useState } from "react";
-// import { AuthState } from "../types/auth.type";
+import { createContext, useState , useEffect } from "react";
 
 export interface AuthState {
     accessToken? :string
@@ -17,6 +16,17 @@ const AuthContext = createContext<AuthStore>({} as AuthStore);
 
 export const AuthProvider = ({ children }:any) => {
     const [auth, setAuth] = useState<AuthState>({} as AuthState);
+
+    useEffect(() => {
+        const storedState = localStorage.getItem('my-app-state');
+        if (storedState) {
+          setAuth(JSON.parse(storedState));
+        }
+      }, []);
+    
+      useEffect(() => {
+        localStorage.setItem('my-app-state', JSON.stringify(auth));
+      }, [auth]);
 
 
     return (
